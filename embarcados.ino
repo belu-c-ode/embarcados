@@ -96,7 +96,7 @@ void loop() {
 
   temperatura = sensorT.readTemperature();
   umidade = sensorT.readHumidity();
-  distancia = (pulseIn(pinEcho, HIGH) * 0.0343) / 2;
+  distancia = (pulseIn(echoDist, HIGH) * 0.0343) / 2;
 
   if(isnan(temperatura) || isnan(umidade))  {
     Serial.println("Erro ao ler sensor DHT :| ");
