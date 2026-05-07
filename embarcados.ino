@@ -1,5 +1,14 @@
 #include <WiFi.h>
 #include <PubSubClient.h>
+#include "DHT.h"
+
+// ===== PINAGEM =====
+#define DHTPIN 2
+#define DHTTYPE 11
+
+#define trigDist 14
+#define echoDisk 33
+
 
 // ===== WIFI =====
 const char* ssid = "LAB_ESEG_IOT"; // usar o nome da rede - aqui usei meu roteador
@@ -10,12 +19,16 @@ const char* mqtt_server = "52.91.140.98"; // ip da máquina virtual
 const int mqtt_port = 1883;
 const char* mqtt_topic = "esp32/teste";
 
-// ===== Constante auxiliar =====
-const float dis_max = 1500.00
-
 // ===== OBJETOS =====
 WiFiClient espClient;
 PubSubClient client(espClient);
+
+DHT sensorT(DHTPIN, DHTTYPE);
+
+// ===== DADOS =====
+float temperatura;
+float umidade;
+float distancia;
 
 // ===== CONECTAR WIFI =====
 void setup_wifi() {
@@ -60,6 +73,10 @@ void setup() {
   setup_wifi();
   
   client.setServer(mqtt_server, mqtt_port);
+
+  sensorT.begin();
+  pinMode(trigDist, OUTPUT);
+  pinMode(echoDist, INPUT);
 }
 
 // ===== LOOP =====
@@ -69,19 +86,32 @@ void loop() {
   }
   client.loop();
 
-  float temperatura = temperatureRead();
+  // Sensor ultrassônico
+  digitalWrite(trigDist, LOW);
+  delayMicroseconds(2);
 
-  // ===== PUBLICAR DADO =====
-  String mensagem = "{\"temperatura\": " + String(temperatura) + "," + "\"umidade\": " + String(umidade) + "\"distancia\": " + String(distancia) + "\"alt_rel\": " + String(dis_max - distancia) + "\"alt_rel_p\": " + String((distancia/dis_max)*100)
-  "}";
+  digitalWrite(trigDist, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigDist, LOW);
+
+  temperatura = sensorT.readTemperature();
+  umidade = sensorT.readHumidity();
+  distancia = (pulseIn(pinEcho, HIGH) * 0.0343) / 2;
+
+  if(isnan(temperatura) || isnan(umidade))  {
+    Serial.println("Erro ao ler sensor DHT :| ");
+  }
+
 
   {
-    temperatura: 50.0
-    umidade: 75
-    distancia: 90
-    altura_relativa: 600
-    altura_relativa_perc: 5
+    temperatura: valor,
+    umidade: valor,
+    distancia: valor  
   }
+
+  // ===== PUBLICAR DADO =====
+  String mensagem = "{\"temperatura\": " + String(temperatura) + "," + \"umidade\": " + String(umidade) + "," + \"distancia\": " + String(distancia) + "}";
+  String msgTemp = 
 
   Serial.println("Enviando: " + mensagem);
   client.publish(mqtt_topic, mensagem.c_str());
