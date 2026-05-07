@@ -102,16 +102,8 @@ void loop() {
     Serial.println("Erro ao ler sensor DHT :| ");
   }
 
-
-  {
-    temperatura: valor,
-    umidade: valor,
-    distancia: valor  
-  }
-
   // ===== PUBLICAR DADO =====
-  String mensagem = "{\"temperatura\": " + String(temperatura) + "," + \"umidade\": " + String(umidade) + "," + \"distancia\": " + String(distancia) + "}";
-  String msgTemp = 
+  String mensagem = "{\"temperatura\": " + String(temperatura) + "," + "\"umidade\": " + String(umidade) + "," + "\"distancia\": " + String(distancia) + "}";
 
   Serial.println("Enviando: " + mensagem);
   client.publish(mqtt_topic, mensagem.c_str());
