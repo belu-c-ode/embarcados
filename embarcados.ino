@@ -4,10 +4,10 @@
 
 // ===== PINAGEM =====
 #define DHTPIN 2
-#define DHTTYPE 11
+#define DHTTYPE DHT11
 
 #define trigDist 14
-#define echoDisk 33
+#define echoDist 33
 
 
 // ===== WIFI =====
@@ -94,9 +94,18 @@ void loop() {
   delayMicroseconds(10);
   digitalWrite(trigDist, LOW);
 
+  // Verificando se o sensor ultrassônico não vai dar erro
+  long duracao = pulseIn(echoDist, HIGH);
+  
+  if(duracao == 0) {
+  Serial.println("Erro no sensor ultrassônico");
+}
+
+  distancia = (duracao * 0.0343) / 2;
+
+  // Sensor de temperatura e humidade DHT11
   temperatura = sensorT.readTemperature();
   umidade = sensorT.readHumidity();
-  distancia = (pulseIn(echoDist, HIGH) * 0.0343) / 2;
 
   if(isnan(temperatura) || isnan(umidade))  {
     Serial.println("Erro ao ler sensor DHT :| ");
@@ -108,5 +117,5 @@ void loop() {
   Serial.println("Enviando: " + mensagem);
   client.publish(mqtt_topic, mensagem.c_str());
 
-  delay(1000);
+  delay(2000);
 }
