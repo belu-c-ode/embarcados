@@ -4,7 +4,6 @@
 
 | Nome         | RA    |
 | ------------ | ----- |
-| Ana Catarina | 41383 |
 | Colin Beluco | 40975 |
 | Diego Santos | 41331 |
 | Joyce Lidia  | 41397 |
@@ -17,6 +16,7 @@ O projeto consiste em um sistema inteligente de monitoramento de enchentes e ala
 
 As informações coletadas são transmitidas via protocolo MQTT para uma infraestrutura hospedada na AWS, onde são processadas e armazenadas em um banco de dados PostgreSQL. Por fim, os dados são exibidos em um painel web desenvolvido com Ionic, permitindo acompanhamento remoto das condições monitoradas e auxiliando na prevenção de riscos à população.
 
+As informações são também pertinentemente dadas em [Documentação.pdf](https://github.com/belu-c-ode/embarcados/blob/main/docs/Docmenta%C3%A7%C3%A3o%20tecnica%20embarcados.pdf)
 ---
 
 # Arquitetura do Projeto
@@ -151,7 +151,7 @@ No código da ESP32, atualizar:
 Acessar a pasta do backend e executar:
 
 ```bash
-node <nome_do_arquivo>.js
+node index_iot_Emb.js
 ```
 
 ## Exemplo
@@ -171,9 +171,9 @@ npm install
 ```
 
 ## Executar Frontend
-
+No local da pasta em que está o frontend (projeto Ionic importado)
 ```bash
-ionic serve --port=8101
+ionic serve
 ```
 
 ---
