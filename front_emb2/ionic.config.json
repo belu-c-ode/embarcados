@@ -1,0 +1,7 @@
+{
+  "name": "front_emb2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

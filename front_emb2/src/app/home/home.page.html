@@ -1,0 +1,102 @@
+<ion-content>
+
+  <div class="dashboard">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+      <div class="logo">
+        IoT
+      </div>
+
+      <div class="menu">
+
+        <div class="menu-item active">
+          Dashboard
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main-content">
+
+      <!-- HEADER -->
+
+      <div class="header">
+
+        <div>
+          <h1>Projeto Embarcados</h1>
+          <p>Monitoramento em tempo</p>
+        </div>
+
+        <div class="status">
+          Online
+        </div>
+
+      </div>
+
+      <!-- CARDS -->
+
+      <div class="cards-grid">
+
+        <div class="card temperatura">
+
+          <div class="card-title">
+            Temperatura
+          </div>
+
+          <div class="card-value">
+            {{ temperatura | number:'1.1-1' }} °C
+          </div>
+
+        </div>
+
+        <div class="card umidade">
+
+          <div class="card-title">
+            Umidade
+          </div>
+
+          <div class="card-value">
+            {{ umidade | number:'1.1-1' }} %
+          </div>
+
+        </div>
+
+        <div class="card distancia">
+
+          <div class="card-title">
+            Distância
+          </div>
+
+          <div class="card-value">
+            {{ distancia | number:'1.1-1' }} cm
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- CHART -->
+
+      <div class="chart-container">
+
+        <div class="chart-header">
+          Histórico de Temperatura
+        </div>
+
+        <div class="chart-body">
+          <canvas #lineCanvas></canvas>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>
