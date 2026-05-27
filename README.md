@@ -2,12 +2,12 @@
 
 ## Integrantes do Grupo
 
-| Nome | RM / Matrícula | Função no Projeto |
+| Nome | RA |
 |---|---|---|
-| Aluno 1 | 000000 | Desenvolvimento Backend |
-| Aluno 2 | 000000 | Infraestrutura em Nuvem |
-| Aluno 3 | 000000 | Desenvolvimento Frontend |
-| Aluno 4 | 000000 | Sistemas Embarcados |
+| Ana Catarina | 41383 |
+| Colin Beluco | 40975 |
+| Diego Santos | 41331 |
+| Joyce Lidia | 41397 |
 
 ---
 
