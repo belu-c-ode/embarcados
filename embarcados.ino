@@ -9,6 +9,8 @@
 #define trigDist 14
 #define echoDist 33
 
+#define PINO_BUZZER  5
+
 
 // ===== WIFI =====
 const char* ssid = "LAB_ESEG_IOT"; // usar o nome da rede - aqui usei meu roteador
@@ -29,6 +31,9 @@ DHT sensorT(DHTPIN, DHTTYPE);
 float temperatura;
 float umidade;
 float distancia;
+
+// ===== AUXILIAR TEMPORIZADOR =====
+unsigned long marcaTempo = 0;
 
 // ===== CONECTAR WIFI =====
 void setup_wifi() {
@@ -63,6 +68,56 @@ void reconnect() {
   }
 }
 
+void obterDadosSensores()  {
+  if (!client.connected()) {
+    reconnect();
+  }
+  client.loop();
+
+  // Sensor ultrassônico
+  digitalWrite(trigDist, LOW);
+  delayMicroseconds(2);
+
+  digitalWrite(trigDist, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigDist, LOW);
+
+  // Verificando se o sensor ultrassônico não vai dar erro
+  long duracao = pulseIn(echoDist, HIGH);
+  
+  if(duracao == 0) {
+    Serial.println("Erro no sensor ultrassônico");
+  }
+
+  distancia = (duracao * 0.0343) / 2;
+
+  // Sensor de temperatura e humidade DHT11
+  temperatura = sensorT.readTemperature();
+  umidade = sensorT.readHumidity();
+
+  if(isnan(temperatura) || isnan(umidade))  {
+    Serial.println("Erro ao ler sensor DHT :| ");
+  }
+
+  // ===== PUBLICAR DADO =====
+  String mensagem = "{\"temperatura\": " + String(temperatura) + "," + "\"umidade\": " + String(umidade) + "," + "\"distancia\": " + String(distancia) + "}";
+
+  Serial.println("Enviando: " + mensagem);
+  client.publish(mqtt_topic, mensagem.c_str());
+
+}
+
+// ===== DISPARAR ALARME =====
+void disparaAlarme()  {
+  // Faz la-mi por 4 vezes
+  for(int i = 0; i < 4)  {
+    tone(PORTA_BUZZER, 440, 250);
+    tone(PORTA_BUZZER, 330, 250);
+  }
+  marcaTempo = millis() - 2000;
+  
+}
+
 // ===== SETUP =====
 void setup() {
   Serial.begin(115200);
@@ -81,41 +136,13 @@ void setup() {
 
 // ===== LOOP =====
 void loop() {
-  if (!client.connected()) {
-    reconnect();
+  // Leitura de sensores, comunicação com MQTT, no tempo determinado de 2 segundos
+  unsigned long tempoAtual = millis();
+  if(tempoAtual - marcaTempo >= 2000)  {
+    obterDadosSensores();
+    marcaTempo = tempoAtual;
   }
-  client.loop();
-
-  // Sensor ultrassônico
-  digitalWrite(trigDist, LOW);
-  delayMicroseconds(2);
-
-  digitalWrite(trigDist, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(trigDist, LOW);
-
-  // Verificando se o sensor ultrassônico não vai dar erro
-  long duracao = pulseIn(echoDist, HIGH);
-  
-  if(duracao == 0) {
-  Serial.println("Erro no sensor ultrassônico");
-}
-
-  distancia = (duracao * 0.0343) / 2;
-
-  // Sensor de temperatura e humidade DHT11
-  temperatura = sensorT.readTemperature();
-  umidade = sensorT.readHumidity();
-
-  if(isnan(temperatura) || isnan(umidade))  {
-    Serial.println("Erro ao ler sensor DHT :| ");
+  if(distancia <= 3.5)  {
+    disparaAlarme();
   }
-
-  // ===== PUBLICAR DADO =====
-  String mensagem = "{\"temperatura\": " + String(temperatura) + "," + "\"umidade\": " + String(umidade) + "," + "\"distancia\": " + String(distancia) + "}";
-
-  Serial.println("Enviando: " + mensagem);
-  client.publish(mqtt_topic, mensagem.c_str());
-
-  delay(2000);
 }
