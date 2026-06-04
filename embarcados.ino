@@ -114,7 +114,7 @@ void disparaAlarme()  {
     tone(PORTA_BUZZER, 440, 250);
     tone(PORTA_BUZZER, 330, 250);
   }
-  marcaTempo = millis();
+  marcaTempo = millis() - 2000;
   
 }
 
