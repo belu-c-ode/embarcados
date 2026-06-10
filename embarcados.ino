@@ -9,7 +9,7 @@
 #define trigDist 14
 #define echoDist 33
 
-#define PINO_BUZZER  5
+#define PINO_BUZZER  4
 
 
 // ===== WIFI =====
@@ -110,12 +110,15 @@ void obterDadosSensores()  {
 // ===== DISPARAR ALARME =====
 void disparaAlarme()  {
   // Faz la-mi por 4 vezes
+  /*
   for(int i = 0; i < 4)  {
     tone(PORTA_BUZZER, 440, 250);
     delay(250);
     tone(PORTA_BUZZER, 330, 250);
     delay(250);
   }
+  */
+  int tempo = 120;
   marcaTempo = millis() - 2000;
   
 }
