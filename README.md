@@ -4,6 +4,7 @@
 
 | Nome         | RA    |
 | ------------ | ----- |
+| Ana Catarina | 41383 |
 | Colin Beluco | 40975 |
 | Diego Santos | 41331 |
 | Joyce Lidia  | 41397 |
