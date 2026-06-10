@@ -149,7 +149,7 @@ void loop() {
   }
 }
 
-/*
+/* UNDERTALE
 tone(PORTA_BUZZER, 279, tempo);
   delay(tempo);
   tone(PORTA_BUZZER, 279, tempo);
@@ -173,5 +173,24 @@ tone(PORTA_BUZZER, 279, tempo);
   tone(PORTA_BUZZER, 330, tempo);
   delay(tempo);
   tone(PORTA_BUZZER, 371, tempo);
+  delay(tempo);
+*/
+
+/* SWEET CHILD OF MINE
+  tone(PORTA_BUZZER, 295, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 295*2, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 440, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 392, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 392*2, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 440, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 371*2, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 440, tempo);
   delay(tempo);
 */
