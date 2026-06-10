@@ -148,3 +148,30 @@ void loop() {
     disparaAlarme();
   }
 }
+
+/*
+tone(PORTA_BUZZER, 279, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 279, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 279*2, tempo);
+  delay(tempo);
+  noTone(PORTA_BUZZER);
+  delay(tempo);
+  tone(PORTA_BUZZER, 417, tempo);
+  delay(tempo);
+  noTone(PORTA_BUZZER);
+  delay(2*tempo);
+  tone(PORTA_BUZZER, 392, tempo);
+  delay(2*tempo);
+  tone(PORTA_BUZZER, 371, tempo);
+  delay(2*tempo);
+  tone(PORTA_BUZZER, 330, 2*tempo);
+  delay(2*tempo);
+  tone(PORTA_BUZZER, 279, 2*tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 330, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 371, tempo);
+  delay(tempo);
+*/
