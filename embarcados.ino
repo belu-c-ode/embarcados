@@ -194,3 +194,33 @@ tone(PORTA_BUZZER, 279, tempo);
   tone(PORTA_BUZZER, 440, tempo);
   delay(tempo);
 */
+
+/* NOKIA
+tone(PORTA_BUZZER, 663*2, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 590*2, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 371*2, 2*tempo);
+  delay(2*tempo);
+  tone(PORTA_BUZZER, 417*2, 2*tempo);
+  delay(2*tempo);
+  tone(PORTA_BUZZER, 558*2, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 497*2, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 295*2, 2*tempo);
+  delay(2*tempo);
+  tone(PORTA_BUZZER, 330*2, 2*tempo);
+  delay(2*tempo);
+  tone(PORTA_BUZZER, 497*2, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 441*2, tempo);
+  delay(tempo);
+  tone(PORTA_BUZZER, 279*2, 2*tempo);
+  delay(2*tempo);
+  tone(PORTA_BUZZER, 330*2, 2*tempo);
+  delay(2*tempo);
+  tone(PORTA_BUZZER, 441*2, 4*tempo);
+  delay(4*tempo);
+  noTone(8);
+*/
